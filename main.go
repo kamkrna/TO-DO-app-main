@@ -14,7 +14,7 @@ import (
 )
   
   func main() {
-	mongoUri := "mongodb+srv://turabali57972:3zkPgdR8zGVMQddA@cluster0.sbl2ptv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+	mongoUri := "mongodb+srv://turabali57972:************@cluster0.sbl2ptv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(mongoUri))
 	if err != nil {
 	  log.Fatal("Error connecting to MongoDB!")
