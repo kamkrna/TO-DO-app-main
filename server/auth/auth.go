@@ -9,7 +9,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-var jwtKey = []byte("Qk64CRujxuKvySD596883YI4akmnDt6B0t8MiZYPbf8cHhHPGyb4UlTLSFjS1DQcKXDO4VixB1x714uc7uuY+g==")
+var jwtKey = []byte("*********************************************************")
 
 type Claims struct{
 	Username string `json:"username"`

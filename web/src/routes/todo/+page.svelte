@@ -8,6 +8,8 @@
     import { onMount } from 'svelte';
     import { goto } from "$app/navigation";
     import ky from 'ky';
+    import { Circle} from 'svelte-loading-spinners';
+	import { navigating } from '$app/stores'
     
     interface Task {
         ID: string;
@@ -147,6 +149,11 @@
 //       getTasks();
 // });
 </script>
+
+{#if $navigating}
+	<Circle size="60" color="#FF3E00" unit="px" duration="1s" />
+{/if}
+
 <section>
 	<header>
 		<h1>{para.toUpperCase()}</h1>
@@ -169,7 +176,7 @@
 				Add Task
 			</button>
 			<button type="button" on:click={getTasks}>
-				Get tasks
+				Refresh tasks
 			</button>
 		</section>
 	</form>

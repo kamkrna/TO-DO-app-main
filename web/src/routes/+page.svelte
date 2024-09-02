@@ -1,9 +1,16 @@
+<svelte:head>
+	<title>Login</title>
+	<meta name="description" content="Login page" />
+</svelte:head>
+
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import { createForm } from 'felte'
     import ky from "ky";
+    import { Jellyfish } from "svelte-loading-spinners";
 
-    $: errorString = ""
+    $: errorString = "";
+	let loading = false;
 
 	const { form } = createForm({
     initialValues: {
@@ -11,6 +18,7 @@
       password: '',
     },
     onSubmit: async (values) => {
+		loading = true;
       const res: {token: string} = await ky.post("http://192.168.18.120:8000", { json: values}).json()
 
       localStorage.setItem('token', res.token)
@@ -28,11 +36,12 @@
     const redirectRegister = () => goto('/registration');
 </script>
 
-<svelte:head>
-	<title>Login</title>
-	<meta name="description" content="Login page" />
-</svelte:head>
-
+{#if loading}
+	<div class="container">
+		Loading please wait...
+		<div class="loader"><Jellyfish size="60" color="#FF3E00" unit="px" duration="1s" /></div>
+	</div>
+{:else}
 <section>
 	<header>
 		<h1>{para.toUpperCase()}</h1>
@@ -67,9 +76,16 @@
 		<p>This is a shit design but bear with me</p>
 	</footer>
 </section>
-
+{/if}
 
 <style>
+	.container {
+        margin-top: 50%;
+	}
+
+	.loader{
+		margin-left: 40%;
+	}
 	section {
 		max-width: 600px;
         margin: 0 auto;
